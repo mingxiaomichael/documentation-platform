@@ -1,0 +1,58 @@
+enum DocumentType {
+  REQUIREMENT
+  DEVELOPMENT
+  TEST
+  DEPLOYMENT
+}
+
+enum DocumentStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+type Document {
+  id: ID!
+  title: String!
+  docType: DocumentType!
+  content: String!
+  status: DocumentStatus!
+  author: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateDocumentInput {
+  title: String!
+  docType: DocumentType!
+  content: String!
+  status: DocumentStatus!
+  author: String!
+}
+
+input UpdateDocumentInput {
+  title: String!
+  docType: DocumentType!
+  content: String!
+  status: DocumentStatus!
+  author: String!
+}
+
+type Query {
+  document(id: ID!): Document!
+  documents(
+    keyword: String,
+    docType: DocumentType,
+    status: DocumentStatus,
+    author: String,
+    page: Int = 0,
+    size: Int = 20
+  ): [Document!]!
+}
+
+type Mutation {
+  createDocument(input: CreateDocumentInput!): ID!
+  updateDocument(id: ID!, input: UpdateDocumentInput!): Document!
+  deleteDocument(id: ID!): Boolean!
+}
