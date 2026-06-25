@@ -20,6 +20,7 @@ spring:
   flyway:
     enabled: true
   graphql:
+    path: /api/graphql
     graphiql:
       enabled: true
 
